@@ -1,4 +1,11 @@
-<button (click)="toggleMonster()">Toggle Monster</button>
+<app-search-bar [(search)]="search"></app-search-bar>
 <div id="card-list">
-    <app-playing-card [monster]="selectedMonster()"/>
+    @for (monster of filterMonsters(); track monster) {
+        <app-playing-card [monster]="monster"/>
+    } @empty {
+        <div class="center">No Monsters found !</div>
+    }
 </div>
+@if (filterMonsters().length > 0) {
+    <div class="center">Found {{filterMonsters().length}} monsters !</div>
+}

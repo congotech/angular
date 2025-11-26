@@ -1,5 +1,9 @@
-#card {
-    display: block;
+.search-bar-container {
+    max-width: 400px;
+    width: 100%;
+}
+
+.card {
     width: 250px;
     padding: 10px;
     border-radius: 10px;
@@ -7,13 +11,6 @@
     background-color: rgb(221, 221, 221);
 }
 
-#card-list {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
 
 #inside {
     padding: 5px;
