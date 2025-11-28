@@ -1,5 +1,5 @@
 import { Component, computed, inject, model, signal } from '@angular/core';
-import { Monster } from '../../models/monster.model';
+import { MonsterModel } from '../../models/monster.model';
 import { SearchBar } from '../../components/search-bar/search-bar';
 import { PlayingCard } from '../../components/playing-card/playing-card';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { MonsterService } from '../../services/monster/monster.service';
 export class MonsterList {
   monsterService = inject(MonsterService);
 
-  monsters = signal<Monster[]>([]);
+  monsters = signal<MonsterModel[]>([]);
   search = model('');
 
   filterMonsters = computed(() => {
@@ -33,7 +33,7 @@ export class MonsterList {
   }
 
   addMonster() {
-    const genericMonster = new Monster();
+    const genericMonster = new MonsterModel();
     this.monsterService.add(genericMonster);
     this.monsters.set(this.monsterService.getAll());
   }

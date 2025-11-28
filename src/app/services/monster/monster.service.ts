@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Monster } from '../../models/monster.model';
+import { MonsterModel } from '../../models/monster.model';
 import { MonsterType } from '../../utils/monster.utils';
-import { TitleStrategy } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MonsterService {
 
-  monsters: Monster[] = [];
+  monsters: MonsterModel[] = [];
   currentIndex: number = 1;
 
   constructor() {
@@ -19,14 +17,14 @@ export class MonsterService {
   private init() {
     this.monsters = [];
 
-    const monster1 = new Monster();
+    const monster1 = new MonsterModel();
     monster1.id = this.currentIndex++;
     monster1.name = "Pik";
     monster1.hp = 40;
     monster1.figureCaption = "No002 Pik";
     this.monsters.push(monster1);
 
-    const monster2 = new Monster();
+    const monster2 = new MonsterModel();
     monster2.id = this.currentIndex++;
     monster2.name = "Car";
     monster2.image = "/images/10.jpeg";
@@ -35,7 +33,7 @@ export class MonsterService {
     monster2.figureCaption = "No003 Car";
     this.monsters.push(monster2);
 
-    const monster3 = new Monster();
+    const monster3 = new MonsterModel();
     monster3.id = this.currentIndex++;
     monster3.name = "Bulbe";
     monster3.image = "/images/6.jpeg";
@@ -44,7 +42,7 @@ export class MonsterService {
     monster3.figureCaption = "No004 Bulbe";
     this.monsters.push(monster3);
 
-    const monster4 = new Monster();
+    const monster4 = new MonsterModel();
     monster4.id = this.currentIndex++;
     monster4.name = "Sala";
     monster4.image = "/images/7.jpeg";
@@ -61,7 +59,7 @@ export class MonsterService {
   private load() {
     const monsterData = localStorage.getItem('monsters');
     if(monsterData) {
-      this.monsters = JSON.parse(monsterData).map((monsterJSON: any) => Object.assign(new Monster(), monsterJSON));
+      this.monsters = JSON.parse(monsterData).map((monsterJSON: any) => Object.assign(new MonsterModel(), monsterJSON));
       this.currentIndex = Math.max(...this.monsters.map(monster => monster.id));
     } else{
       this.init();
@@ -69,16 +67,16 @@ export class MonsterService {
     }
   }
   
-  getAll(): Monster[] {
+  getAll(): MonsterModel[] {
     return this.monsters.map(monster => monster.copy());
   }
 
-  get(id: number): Monster | undefined {
+  get(id: number): MonsterModel | undefined {
     const monster = this.monsters.find(monster => monster.id === id);
     return monster ? monster.copy() : undefined;
   }
 
-  add(monster: Monster): Monster {
+  add(monster: MonsterModel): MonsterModel {
     const monsterCopy = monster.copy();
 
     monsterCopy.id = this.currentIndex;
@@ -89,7 +87,7 @@ export class MonsterService {
     return monsterCopy;
   }
 
-  update(monster: Monster): Monster {
+  update(monster: MonsterModel): MonsterModel {
     const monsterCopy = monster.copy();
 
     const monsterIndex = this.monsters.findIndex(originalMonster => originalMonster.id === monster.id);

@@ -1,5 +1,5 @@
 import { Component, computed, input, Input, InputSignal, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Monster } from '../../models/monster.model';
+import { MonsterModel } from '../../models/monster.model';
 import { MonsterTypeProperties } from '../../utils/monster.utils';
 
 @Component({
@@ -9,7 +9,7 @@ import { MonsterTypeProperties } from '../../utils/monster.utils';
   styleUrl: './playing-card.css',
 })
 export class PlayingCard {
-  monster = input(new Monster());
+  monster = input(new MonsterModel());
   monsterTypeIcon = computed(() => {
     return MonsterTypeProperties[this.monster().type].imageUrl;
   })
